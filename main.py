@@ -12,40 +12,40 @@ DATAFINAL = datetime(2016,12,1)
 # Função para adicionar CSS personalizado
 def add_css(file_name):
     with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Aplica o CSS personalizado à aplicação
-add_css('styles.css')
+add_css("styles.css")
 
 #Ler as base de dados Preços
-precos = pd.read_csv('precos.csv', sep=";", encoding='utf-8')
+precos = pd.read_csv("precos.csv", sep=";", encoding="utf-8")
 
 #obter lista de cursos da base
-coluna = precos['Modulo ou Trilhas']
+coluna = precos["Modulo ou Trilhas"]
 
 #Ler as bases de dados Leads
-base = pd.read_csv('basededadoslead.csv', sep=";", encoding='utf-8')
+base = pd.read_csv("basededadoslead.csv", sep=";", encoding="utf-8")
 
 #Função para gravar dados
 def gravar_dados(nome, doc, tel, data, endereco, cidade, bairro, cep,
                  nome2, doc2, tel2, data2, endereco2, cidade2, bairro2, cep2, curso, desejo):
-    dados = {'Nome_responsavel': [nome], 'CPFRG_Aluno': [doc], 'WhatsApp_Aluno': [tel], 'Nascimento_Aluno': [data], 
-             'Endereco_Aluno': [endereco], 'Cidade_Aluno': [cidade], 'Bairro_Aluno': [bairro], 'Cep_Aluno': [cep],
-             'Nome_Responsavel': [nome2], 'CPFRG_Responsavel': [doc2], 'WhatsApp_Responsavel': [tel2], 
-             'Nascimento_Responsavel': [data2], 'Endereco_Responsavel': [endereco2], 'Cidade_Responsavel': [cidade2], 
-             'Bairro_Responsavel': [bairro2], 'Cep_Responsavel': [cep2], 'Curso_Selecionado': [curso], "Desejo_Selecionado": [desejo]}
+    dados = {"Nome_responsavel": [nome], "CPFRG_Aluno": [doc], "WhatsApp_Aluno": [tel], "Nascimento_Aluno": [data], 
+             "Endereco_Aluno": [endereco], "Cidade_Aluno": [cidade], "Bairro_Aluno": [bairro], "Cep_Aluno": [cep],
+             "Nome_Responsavel": [nome2], "CPFRG_Responsavel": [doc2], "WhatsApp_Responsavel": [tel2], 
+             "Nascimento_Responsavel": [data2], "Endereco_Responsavel": [endereco2], "Cidade_Responsavel": [cidade2], 
+             "Bairro_Responsavel": [bairro2], "Cep_Responsavel": [cep2], "Curso_Selecionado": [curso], "Desejo_Selecionado": [desejo]}
     
     #cadastrar os dados no arquivo
     df = pd.DataFrame(dados)
     st.balloons() 
     # Checa se o arquivo já existe
-    if os.path.isfile('basededadoslead.csv'):
-        df.to_csv('basededadoslead.csv', mode='a', header=False, index=False, sep=';')
+    if os.path.isfile("basededadoslead.csv"):
+        df.to_csv("basededadoslead.csv", mode="a", header=False, index=False, sep=";")
     else:
-        df.to_csv('basededadoslead.csv', index=False)    
+        df.to_csv("basededadoslead.csv", index=False)    
 
 def limpardados():
-    auto.press('f5')
+    auto.press("f5")
 
 #Função principal
 def main():
@@ -88,7 +88,7 @@ def main():
         cep_responsavel = st.text_input("CEP:..", key="cep_responsavel")  
 
     # Caixa de listagem
-    selecao = st.selectbox('Escolha seu curso de interesse:..', coluna)
+    selecao = st.selectbox("Escolha seu curso de interesse:..", coluna)
     
     st.sidebar.title(":sunglasses: OPÇÕES GRATUITAS")
     st.sidebar.write("")
@@ -122,6 +122,6 @@ def main():
         else:
             st.sidebar.error("Favor cadastrar NOME e TELEFONE do aluno")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
     
